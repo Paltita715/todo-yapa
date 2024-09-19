@@ -3,7 +3,27 @@ import ProductCard from '../components/ProductCard.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
-<Layout title='Inicio' description=''>
-  <h1>Hola Astro</h1>
-  <ProductCard />
+<Layout title='Inicio' description='descripcion de pagina'>
+  <section class='flex gap-7'>
+    <ProductCard
+      image='https://img.freepik.com/foto-gratis/arco-iris-al-final-paisaje-carretera_23-2151596720.jpg'
+      alt='Paisaje'
+      title='Producto 01'
+      info='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, excepturi.'
+    />
+    <ProductCard
+      image='https://cards.algoreducation.com/_next/image?url=https%3A%2F%2Ffiles.algoreducation.com%2Fproduction-ts%2F__S3__9691abed-ff1f-4b6b-aa55-e8acbc7366bb&w=3840&q=75'
+      alt='Paisaje'
+      title='Producto 02'
+      info='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, excepturi.'
+      horizontal
+    />
+    <ProductCard
+      image='https://i.ytimg.com/vi/9Zq79uu_o5E/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLC6kxmhjEI3VuZWsNc4I_VFAEUWsA'
+      alt='Paisaje'
+      title='Producto 03'
+      info='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, excepturi.'
+      cuadrado
+    />
+  </section>
 </Layout>

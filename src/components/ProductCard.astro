@@ -1,29 +1,69 @@
-<div class='relative mx-auto w-96 h-[30rem]'>
-  <div
-    class="absolute inset-0 w-full h-full bg-cover bg-center bg-[url('https://static.vecteezy.com/system/resources/previews/008/040/588/non_2x/minimalist-flat-landscape-with-lake-and-mountains-for-cards-banners-ad-vector.jpg')] filter blur-[15px] -z-10"
-  >
-  </div>
-  <article
-    class='bg-[url(https://static.vecteezy.com/system/resources/previews/008/040/588/non_2x/minimalist-flat-landscape-with-lake-and-mountains-for-cards-banners-ad-vector.jpg)] bg-center w-full h-full bg-cover transform duration-500 hover:-translate-y-2 cursor-pointer group rounded-xl mx-auto relative overflow-hidden'
-  >
+---
+interface Props {
+  image: string
+  alt: string
+  title: string
+  info: string
+  horizontal?: boolean
+  cuadrado?: boolean
+  fondoBlur?: boolean
+}
+const { image, alt, title, info, horizontal, cuadrado, fondoBlur } = Astro.props
+
+const sizeClass = horizontal
+  ? 'h-96 w-[30rem]'
+  : cuadrado
+    ? 'h-96 w-96'
+    : 'h-[30rem] w-96'
+---
+
+<a
+  class=`card block relative mx-auto ${sizeClass} group transform duration-300 hover:-translate-y-2`
+  href='/waza'
+>
+  <div class='relative w-full h-full overflow-hidden rounded-lg'>
+    <img
+      class='image w-full h-full object-cover absolute inset-0'
+      src={image}
+      alt={alt}
+    />
     <div
-      class='absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black to-transparent rounded-b-xl'
+      class='absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#121212] to-transparent rounded-b-xl'
     >
     </div>
     <div class='absolute bottom-0 left-0 w-full p-4 text-white z-10'>
-      <h1 class='text-xl font-bold'>Título del producto</h1>
+      <h2 class='text-xl font-bold'>{title}</h2>
     </div>
     <div
-      class='absolute bottom-[100%] right-[100%] w-[150%] h-full bg-black bg-opacity-70 transform group-hover:translate-x-full group-hover:translate-y-full transition-transform duration-500 ease-in-out flex z-20'
-      style='clip-path: polygon(0 0, 0 70%, 100% 0);'
+      class='absolute bottom-[100%] right-[100%] w-[150%] h-full bg-[#121212] bg-opacity-70 transform group-hover:translate-x-full group-hover:translate-y-full transition-transform duration-300 ease-in-out flex z-20'
+      style='clip-path: polygon(0 0, 0 65%, 100% 0);'
     >
       <div class='text-white w-96 p-4'>
-        <h2 class='text-2xl font-bold mb-3'>Más Información</h2>
-        <p class='text-lg'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas,
-          odit?
-        </p>
+        <p class='text-lg'>{info}</p>
       </div>
     </div>
-  </article>
-</div>
+  </div>
+</a>
+
+<script>
+  function initializeCardImages() {
+    const cards = document.querySelectorAll('.card')
+
+    cards.forEach((card) => {
+      const image = card.querySelector('img')
+      if (image) {
+        const imageBlur = document.createElement('img')
+        imageBlur.className = image.className
+        imageBlur.classList.add('-z-10', 'filter', 'blur-md', 'saturate-200')
+        imageBlur.src = image.src
+        card.prepend(imageBlur)
+      }
+    })
+  }
+
+  initializeCardImages()
+
+  document.addEventListener('astro:after-swap', () => {
+    initializeCardImages()
+  })
+</script>

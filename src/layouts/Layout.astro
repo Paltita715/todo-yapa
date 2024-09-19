@@ -1,4 +1,7 @@
 ---
+import { ViewTransitions, fade } from 'astro:transitions'
+import Header from '../components/Header.astro'
+
 interface Props {
   title: string
   description: string
@@ -13,9 +16,13 @@ const { title, description } = Astro.props
     <meta name='viewport' content='width=device-width, initial-scale=1.0' />
     <meta name='description' content={description} />
     <link rel='shortcut icon' href='favicon.svg' type='image/svg' />
+    <ViewTransitions />
     <title>Todo Yapa | {title}</title>
   </head>
   <body>
-    <slot />
+    <Header />
+    <main class='max-w-7xl mx-auto my-10'>
+      <slot />
+    </main>
   </body>
 </html>
